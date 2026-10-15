@@ -21,7 +21,8 @@
     --cream-line: rgba(235, 229, 176, 0.38);
     --black: #000;
     /* Width of the stacked title. Every word is scaled to run this wide. */
-    --w: min(84vw, 440px);
+    --w: min(72vw, 300px, 27vh);
+    --w: min(72vw, 300px, 27svh);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,7 +38,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: clamp(40px, 8vh, 88px) 20px clamp(36px, 6vh, 64px);
+    padding: clamp(22px, 4vh, 44px) 20px clamp(20px, 3vh, 36px);
   }
 
   main { width: 100%; display: flex; flex-direction: column; align-items: center; }
@@ -50,7 +51,7 @@
     text-indent: 0.34em;
     text-transform: uppercase;
     color: var(--cream);
-    margin-bottom: clamp(28px, 5vh, 48px);
+    margin-bottom: clamp(14px, 2.4vh, 24px);
   }
 
   /* ---- Signature title: tall, extra-condensed Didone, stacked, edge to edge ---- */
@@ -97,37 +98,92 @@
   .w3 { animation-delay: .76s !important; }
 
   @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-  .copy, .embed, .fine { animation: rise 1.2s ease-out 1.4s both; }
+  .copy, form, .fine { animation: rise 1.2s ease-out 1.4s both; }
 
   /* ---- Copy ---- */
   .copy {
     width: min(92vw, 460px);
-    margin-top: clamp(36px, 6vh, 56px);
+    margin-top: clamp(18px, 3vh, 30px);
     text-align: center;
   }
   .copy .line {
-    font-size: clamp(22px, 5.4vw, 28px);
-    line-height: 1.32;
+    font-size: clamp(20px, 4.8vw, 25px);
+    line-height: 1.3;
     color: var(--cream);
   }
   .copy .line em { font-style: italic; }
   .copy .ask {
-    margin-top: 24px;
-    font-size: clamp(25px, 6.4vw, 32px);
+    margin-top: 14px;
+    font-size: clamp(21px, 5vw, 27px);
     line-height: 1.3;
     color: var(--cream);
   }
 
-  /* ---- EmailOctopus embed ---- */
-  .embed {
-    width: min(92vw, 400px);
-    margin-top: 34px;
+  /* ---- Form ---- */
+  form {
+    width: min(92vw, 520px);
+    margin-top: clamp(16px, 3vh, 28px);
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 12px;
   }
+  .field { flex: 1 1 240px; }
+  .field label {
+    position: absolute;
+    width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  }
+  .field input {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--cream-line);
+    border-radius: 0;
+    color: var(--cream);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 22px;
+    padding: 12px 2px;
+    text-align: center;
+    outline: none;
+    transition: border-color .25s;
+  }
+  .field input::placeholder { color: rgba(235, 229, 176, 0.6); font-style: italic; }
+  .field input:focus { border-bottom-color: var(--cream); }
+  @media (max-width: 520px) { form { flex-direction: column; align-items: stretch; } button { width: 100%; } }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  button {
+    margin-top: 0;
+    flex: 0 0 auto;
+    background: var(--cream);
+    color: var(--black);
+    border: 0;
+    border-radius: 0;
+    padding: 17px 26px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    text-indent: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity .2s, transform .2s;
+  }
+  button:hover { opacity: .9; }
+  button:active { transform: translateY(1px); }
+  button:focus-visible, .field input:focus-visible { outline: 1px solid var(--cream); outline-offset: 4px; }
+  button[disabled] { opacity: .55; cursor: default; }
+  .status { width: 100%; min-height: 1.4em; text-align: center; font-size: 19px; color: var(--cream-soft); }
+  .status.err { color: #e9b8a8; }
+
+  /* ---- Success state ---- */
+  .done { display: none; width: min(92vw, 460px); margin-top: 28px; text-align: center; animation: rise 1.2s ease-out both; }
+  .done .big { font-size: clamp(26px, 6.2vw, 34px); line-height: 1.25; }
+  .done .small { margin-top: 14px; font-size: 22px; color: var(--cream-soft); }
+  body.is-done form, body.is-done .copy .ask { display: none; }
+  body.is-done .done { display: block; }
 
   .fine {
-    margin-top: 30px;
+    margin-top: clamp(14px, 2.6vh, 26px);
     font-family: "Montserrat", sans-serif;
     font-size: 13px;
     letter-spacing: 0.22em;
@@ -139,7 +195,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .sig-title .w, .copy, .embed, .fine { animation: none !important; }
+    .sig-title .w, .copy, form, .fine { animation: none !important; }
   }
 </style>
 </head>
@@ -160,12 +216,52 @@
       <p class="ask">Drop your email. I'll notify you when the book gets published!</p>
     </section>
 
-    <div class="embed">
-      <script async src="https://eomail6.com/form/86c3a2f0-8b58-11f1-b9ec-b316d47b78c3.js" data-form="86c3a2f0-8b58-11f1-b9ec-b316d47b78c3"></script>
-    </div>
+    <form id="signup" novalidate>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="your email" autocomplete="email" inputmode="email" required maxlength="254" />
+      </div>
+      <div class="hp" aria-hidden="true">
+        <label for="company">Company</label>
+        <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+      <button type="submit" id="submit">Notify me</button>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </form>
+
+    <section class="done" aria-live="polite">
+      <p class="big">You're on the list.</p>
+      <p class="small">I'll find you when it's time.</p>
+    </section>
 
     <p class="fine">Robyn Linn<br />No noise. Unsubscribe anytime.</p>
   </main>
 
+<script>
+  (function () {
+    var form = document.getElementById("signup");
+    var btn = document.getElementById("submit");
+    var statusEl = document.getElementById("status");
+    var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    function setStatus(msg, isErr) { statusEl.textContent = msg || ""; statusEl.className = "status" + (isErr ? " err" : ""); }
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var email = form.email.value.trim();
+      if (!emailRe.test(email)) { setStatus("That email doesn't look right.", true); form.email.focus(); return; }
+      btn.disabled = true; setStatus("");
+      fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email, company: form.company.value })
+      })
+        .then(function (r) { return r.json().catch(function () { return {}; }); })
+        .then(function (data) {
+          if (data && data.ok) { document.body.classList.add("is-done"); }
+          else { btn.disabled = false; setStatus((data && data.error) || "Something snagged. Try again in a moment.", true); }
+        })
+        .catch(function () { btn.disabled = false; setStatus("Something snagged. Try again in a moment.", true); });
+    });
+  })();
+</script>
 </body>
 </html>
