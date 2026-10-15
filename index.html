@@ -4,33 +4,31 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Come Into Me — A Memoir by Robyn Linn</title>
-<meta name="description" content="At thirteen, she heard a calling. She spent thirty years mistaking it for a command. Drop your email — Robyn Linn will notify you when the book gets published." />
+<meta name="description" content="Drop your email — Robyn Linn will notify you when Come Into Me is available in print and digital." />
 <meta name="theme-color" content="#000000" />
 <meta property="og:title" content="COME INTO ME — A memoir by Robyn Linn" />
-<meta property="og:description" content="At thirteen, she heard a calling. She spent thirty years mistaking it for a command." />
+<meta property="og:description" content="Get notified when Come Into Me is available in print and digital." />
 <meta property="og:type" content="website" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wdth,wght@62.5..100,100..900&family=Montserrat:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wdth,wght@62.5..100,100..900&family=Montserrat:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" />
 
 <style>
   :root {
     --cream: #ebe5b0;
-    --cream-soft: rgba(235, 229, 176, 0.72);
-    --cream-line: rgba(235, 229, 176, 0.38);
+    --cream-soft: rgba(235, 229, 176, 0.82);
+    --cream-line: rgba(235, 229, 176, 0.55);
     --black: #000;
-    /* Width of the stacked title. Every word is scaled to run this wide. */
-    --w: min(72vw, 300px, 27vh);
-    --w: min(72vw, 300px, 27svh);
+    --title-w: min(88vw, 780px);
+    --col: min(92vw, 560px);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { background: var(--black); }
 
   body {
-    min-height: 100svh;
+    min-height: 100vh; min-height: 100svh;
     background: var(--black);
     color: var(--cream);
     font-family: "Cormorant Garamond", Georgia, serif;
@@ -38,10 +36,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: clamp(22px, 4vh, 44px) 20px clamp(20px, 3vh, 36px);
+    justify-content: center;
+    padding: clamp(20px, 4vh, 48px) 20px;
   }
 
-  main { width: 100%; display: flex; flex-direction: column; align-items: center; }
+  main { width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; }
 
   .kicker {
     font-family: "Montserrat", sans-serif;
@@ -51,151 +50,144 @@
     text-indent: 0.34em;
     text-transform: uppercase;
     color: var(--cream);
-    margin-bottom: clamp(14px, 2.4vh, 24px);
+    margin-bottom: clamp(12px, 2.4vh, 22px);
   }
 
-  /* ---- Signature title: tall, extra-condensed Didone, stacked, edge to edge ---- */
-  .sig-title { width: var(--w); display: flex; flex-direction: column; gap: calc(var(--w) * 0.055); }
-  .sig-title h1 { display: contents; font-weight: inherit; }
-
+  /* ---- Signature title: tall, extra-condensed Didone, ALL CAPS, one line ---- */
+  .sig-title { width: var(--title-w); }
+  .sig-title h1 { font-weight: inherit; }
   .sig-title .w {
+    --fs: calc(min(88vw, 780px) / 5.75);
     position: relative;
     display: block;
     width: 100%;
+    height: calc(var(--fs) * 0.8925);
     font-family: "Noto Serif Display", serif;
     font-weight: 300;
     font-stretch: 62.5%;
+    font-size: var(--fs);
+    line-height: 0.72;
+    letter-spacing: 0.01em;
     text-transform: uppercase;
+    white-space: nowrap;
     color: var(--cream);
     text-shadow: none;
-    letter-spacing: 0.01em;
-    text-align: center;
-    line-height: 0.72;
-    /* visible cap height = 0.8925 × font-size */
-    height: calc(var(--fs) * 0.8925);
-    font-size: var(--fs);
   }
   .sig-title .w > i {
     position: absolute;
-    left: 0; right: 0;
+    left: 50%;
     top: calc(var(--fs) * 0.045);
-    display: block;
+    display: inline-block;
     font-style: normal;
-    transform: scaleY(1.25);
+    transform: translateX(-50%) scaleY(1.25);
     transform-origin: 50% 0;
   }
-  .w1 { --fs: calc(var(--w) / 2.223); } /* COME */
-  .w2 { --fs: calc(var(--w) / 1.877); } /* INTO */
-  .w3 { --fs: calc(var(--w) / 1.201); } /* ME   */
 
-  /* words sharpen out of a soft blur */
   @keyframes sharpen {
     from { opacity: 0; filter: blur(14px); transform: translateY(14px); }
     to   { opacity: 1; filter: blur(0);    transform: none; }
   }
-  .sig-title .w { animation: sharpen 1.5s cubic-bezier(.39,.575,.565,1) both; }
-  .w2 { animation-delay: .38s !important; }
-  .w3 { animation-delay: .76s !important; }
-
   @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-  .copy, form, .fine { animation: rise 1.2s ease-out 1.4s both; }
+  .sig-title .w { animation: sharpen 1.5s cubic-bezier(.39,.575,.565,1) both; }
+  .lower { animation: rise 1.2s ease-out 0.9s both; }
 
-  /* ---- Copy ---- */
-  .copy {
-    width: min(92vw, 460px);
-    margin-top: clamp(18px, 3vh, 30px);
-    text-align: center;
-  }
-  .copy .line {
-    font-size: clamp(20px, 4.8vw, 25px);
-    line-height: 1.3;
-    color: var(--cream);
-  }
-  .copy .line em { font-style: italic; }
-  .copy .ask {
-    margin-top: 14px;
-    font-size: clamp(21px, 5vw, 27px);
-    line-height: 1.3;
-    color: var(--cream);
-  }
-
-  /* ---- Form ---- */
-  form {
-    width: min(92vw, 520px);
-    margin-top: clamp(16px, 3vh, 28px);
+  /* ---- Everything below the title, on one even rhythm ---- */
+  .lower {
+    width: var(--col);
+    margin-top: clamp(30px, 5.5vh, 52px);
     display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    gap: 12px;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(18px, 3vh, 28px);
   }
-  .field { flex: 1 1 240px; }
+
+  .ask {
+    font-size: clamp(24px, 5.2vw, 32px);
+    line-height: 1.3;
+    color: var(--cream);
+    text-wrap: balance;
+  }
+
+  /* ---- Form: a proper box + button ---- */
+  form { width: 100%; display: flex; flex-wrap: wrap; gap: 10px; }
+  .field { flex: 1 1 260px; }
   .field label {
-    position: absolute;
-    width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
   }
   .field input {
     width: 100%;
-    background: transparent;
-    border: 0;
-    border-bottom: 1px solid var(--cream-line);
-    border-radius: 0;
+    height: 58px;
+    background: rgba(235, 229, 176, 0.07);
+    border: 1px solid var(--cream-line);
+    border-radius: 2px;
     color: var(--cream);
     font-family: "Cormorant Garamond", Georgia, serif;
+    font-weight: 500;
     font-size: 22px;
-    padding: 12px 2px;
-    text-align: center;
+    padding: 0 18px;
+    text-align: left;
     outline: none;
-    transition: border-color .25s;
+    transition: border-color .2s, background .2s, box-shadow .2s;
   }
-  .field input::placeholder { color: rgba(235, 229, 176, 0.6); font-style: italic; }
-  .field input:focus { border-bottom-color: var(--cream); }
-  @media (max-width: 520px) { form { flex-direction: column; align-items: stretch; } button { width: 100%; } }
+  .field input::placeholder { color: rgba(235, 229, 176, 0.7); font-style: italic; font-weight: 400; }
+  .field input:focus {
+    border-color: var(--cream);
+    background: rgba(235, 229, 176, 0.11);
+    box-shadow: 0 0 0 3px rgba(235, 229, 176, 0.18);
+  }
   .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
   button {
-    margin-top: 0;
     flex: 0 0 auto;
+    height: 58px;
     background: var(--cream);
     color: var(--black);
-    border: 0;
-    border-radius: 0;
-    padding: 17px 26px;
+    border: 1px solid var(--cream);
+    border-radius: 2px;
+    padding: 0 28px;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
     font-size: 13px;
-    letter-spacing: 0.3em;
-    text-indent: 0.3em;
+    letter-spacing: 0.28em;
+    text-indent: 0.28em;
     text-transform: uppercase;
     cursor: pointer;
     transition: opacity .2s, transform .2s;
   }
   button:hover { opacity: .9; }
   button:active { transform: translateY(1px); }
-  button:focus-visible, .field input:focus-visible { outline: 1px solid var(--cream); outline-offset: 4px; }
+  button:focus-visible { outline: 2px solid var(--cream); outline-offset: 3px; }
   button[disabled] { opacity: .55; cursor: default; }
-  .status { width: 100%; min-height: 1.4em; text-align: center; font-size: 19px; color: var(--cream-soft); }
-  .status.err { color: #e9b8a8; }
 
-  /* ---- Success state ---- */
-  .done { display: none; width: min(92vw, 460px); margin-top: 28px; text-align: center; animation: rise 1.2s ease-out both; }
-  .done .big { font-size: clamp(26px, 6.2vw, 34px); line-height: 1.25; }
-  .done .small { margin-top: 14px; font-size: 22px; color: var(--cream-soft); }
-  body.is-done form, body.is-done .copy .ask { display: none; }
-  body.is-done .done { display: block; }
+  .status { width: 100%; min-height: 1.3em; font-size: 19px; color: var(--cream-soft); }
+  .status.err { color: #f0c2b3; }
+  .status:empty { display: none; }
 
   .fine {
-    margin-top: clamp(14px, 2.6vh, 26px);
     font-family: "Montserrat", sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.22em;
-    text-indent: 0.22em;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-indent: 0.2em;
     text-transform: uppercase;
     color: var(--cream);
-    text-align: center;
-    line-height: 1.9;
+    line-height: 1.8;
+  }
+
+  /* ---- Success state ---- */
+  .done { display: none; flex-direction: column; align-items: center; gap: 10px; }
+  .done .big { font-size: clamp(28px, 6.4vw, 36px); line-height: 1.2; }
+  .done .small { font-size: 22px; color: var(--cream-soft); }
+  body.is-done form, body.is-done .ask { display: none; }
+  body.is-done .done { display: flex; }
+
+  @media (max-width: 520px) {
+    form { flex-direction: column; }
+    .field { flex-basis: auto; }
+    button { width: 100%; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .sig-title .w, .copy, form, .fine { animation: none !important; }
+    .sig-title .w, .lower { animation: none !important; }
   }
 </style>
 </head>
@@ -204,46 +196,56 @@
     <p class="kicker">A Memoir</p>
 
     <div class="sig-title" role="img" aria-label="Come Into Me">
-      <h1 aria-hidden="true">
-        <span class="w w1"><i>Come</i></span>
-        <span class="w w2"><i>Into</i></span>
-        <span class="w w3"><i>Me</i></span>
-      </h1>
+      <h1 aria-hidden="true"><span class="w"><i>Come Into Me</i></span></h1>
     </div>
 
-    <section class="copy">
-      <p class="line">At thirteen, she heard a calling.<br />She spent thirty years <em>mistaking it for a command.</em></p>
-      <p class="ask">Drop your email. I'll notify you when the book gets published!</p>
-    </section>
+    <div class="lower">
+      <p class="ask">Drop your email. I'll notify you when it's available — in print and digital.</p>
 
-    <form id="signup" novalidate>
-      <div class="field">
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" placeholder="your email" autocomplete="email" inputmode="email" required maxlength="254" />
-      </div>
-      <div class="hp" aria-hidden="true">
-        <label for="company">Company</label>
-        <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
-      </div>
-      <button type="submit" id="submit">Notify me</button>
-      <p class="status" id="status" role="status" aria-live="polite"></p>
-    </form>
+      <form id="signup" novalidate>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="Your email address" autocomplete="email" inputmode="email" required maxlength="254" />
+        </div>
+        <div class="hp" aria-hidden="true">
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <button type="submit" id="submit">Notify me</button>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+      </form>
 
-    <section class="done" aria-live="polite">
-      <p class="big">You're on the list.</p>
-      <p class="small">I'll find you when it's time.</p>
-    </section>
+      <section class="done" aria-live="polite">
+        <p class="big">You're on the list.</p>
+        <p class="small">I'll find you when it's time.</p>
+      </section>
 
-    <p class="fine">Robyn Linn<br />No noise. Unsubscribe anytime.</p>
+      <p class="fine">Robyn Linn &nbsp;·&nbsp; No noise. Unsubscribe anytime.</p>
+    </div>
   </main>
 
 <script>
   (function () {
+    // Fit COME INTO ME to the full width of its box, whatever the font metrics.
+    function fit() {
+      var box = document.querySelector(".sig-title .w");
+      if (!box) return;
+      var span = box.firstElementChild;
+      var W = box.clientWidth;
+      box.style.setProperty("--fs", "100px");
+      var tw = span.getBoundingClientRect().width;
+      if (tw > 0 && W > 0) box.style.setProperty("--fs", (100 * W / tw) + "px");
+    }
+    fit();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    window.addEventListener("resize", fit);
+
     var form = document.getElementById("signup");
     var btn = document.getElementById("submit");
     var statusEl = document.getElementById("status");
     var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     function setStatus(msg, isErr) { statusEl.textContent = msg || ""; statusEl.className = "status" + (isErr ? " err" : ""); }
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var email = form.email.value.trim();
