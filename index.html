@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Come Into Me — A Memoir by Robyn Linn</title>
+<meta name="description" content="At thirteen, she heard a calling. She spent thirty years mistaking it for a command. Drop your email — Robyn Linn will notify you when the book gets published." />
+<meta name="theme-color" content="#000000" />
+<meta property="og:title" content="COME INTO ME — A memoir by Robyn Linn" />
+<meta property="og:description" content="At thirteen, she heard a calling. She spent thirty years mistaking it for a command." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:wdth,wght@62.5..100,100..900&family=Montserrat:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" />
+
+<style>
+  :root {
+    --cream: #ebe5b0;
+    --cream-soft: rgba(235, 229, 176, 0.72);
+    --cream-line: rgba(235, 229, 176, 0.38);
+    --black: #000;
+    /* Width of the stacked title. Every word is scaled to run this wide. */
+    --w: min(84vw, 440px);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { background: var(--black); }
+
+  body {
+    min-height: 100svh;
+    background: var(--black);
+    color: var(--cream);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(40px, 8vh, 88px) 20px clamp(36px, 6vh, 64px);
+  }
+
+  main { width: 100%; display: flex; flex-direction: column; align-items: center; }
+
+  .kicker {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.34em;
+    text-indent: 0.34em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: clamp(28px, 5vh, 48px);
+  }
+
+  /* ---- Signature title: tall, extra-condensed Didone, stacked, edge to edge ---- */
+  .sig-title { width: var(--w); display: flex; flex-direction: column; gap: calc(var(--w) * 0.055); }
+  .sig-title h1 { display: contents; font-weight: inherit; }
+
+  .sig-title .w {
+    position: relative;
+    display: block;
+    width: 100%;
+    font-family: "Noto Serif Display", serif;
+    font-weight: 300;
+    font-stretch: 62.5%;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-shadow: none;
+    letter-spacing: 0.01em;
+    text-align: center;
+    line-height: 0.72;
+    /* visible cap height = 0.8925 × font-size */
+    height: calc(var(--fs) * 0.8925);
+    font-size: var(--fs);
+  }
+  .sig-title .w > i {
+    position: absolute;
+    left: 0; right: 0;
+    top: calc(var(--fs) * 0.045);
+    display: block;
+    font-style: normal;
+    transform: scaleY(1.25);
+    transform-origin: 50% 0;
+  }
+  .w1 { --fs: calc(var(--w) / 2.223); } /* COME */
+  .w2 { --fs: calc(var(--w) / 1.877); } /* INTO */
+  .w3 { --fs: calc(var(--w) / 1.201); } /* ME   */
+
+  /* words sharpen out of a soft blur */
+  @keyframes sharpen {
+    from { opacity: 0; filter: blur(14px); transform: translateY(14px); }
+    to   { opacity: 1; filter: blur(0);    transform: none; }
+  }
+  .sig-title .w { animation: sharpen 1.5s cubic-bezier(.39,.575,.565,1) both; }
+  .w2 { animation-delay: .38s !important; }
+  .w3 { animation-delay: .76s !important; }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .copy, .embed, .fine { animation: rise 1.2s ease-out 1.4s both; }
+
+  /* ---- Copy ---- */
+  .copy {
+    width: min(92vw, 460px);
+    margin-top: clamp(36px, 6vh, 56px);
+    text-align: center;
+  }
+  .copy .line {
+    font-size: clamp(22px, 5.4vw, 28px);
+    line-height: 1.32;
+    color: var(--cream);
+  }
+  .copy .line em { font-style: italic; }
+  .copy .ask {
+    margin-top: 24px;
+    font-size: clamp(25px, 6.4vw, 32px);
+    line-height: 1.3;
+    color: var(--cream);
+  }
+
+  /* ---- EmailOctopus embed ---- */
+  .embed {
+    width: min(92vw, 400px);
+    margin-top: 34px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .fine {
+    margin-top: 30px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-indent: 0.22em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-align: center;
+    line-height: 1.9;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sig-title .w, .copy, .embed, .fine { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+  <main>
+    <p class="kicker">A Memoir</p>
+
+    <div class="sig-title" role="img" aria-label="Come Into Me">
+      <h1 aria-hidden="true">
+        <span class="w w1"><i>Come</i></span>
+        <span class="w w2"><i>Into</i></span>
+        <span class="w w3"><i>Me</i></span>
+      </h1>
+    </div>
+
+    <section class="copy">
+      <p class="line">At thirteen, she heard a calling.<br />She spent thirty years <em>mistaking it for a command.</em></p>
+      <p class="ask">Drop your email. I'll notify you when the book gets published!</p>
+    </section>
+
+    <div class="embed">
+      <script async src="https://eomail6.com/form/86c3a2f0-8b58-11f1-b9ec-b316d47b78c3.js" data-form="86c3a2f0-8b58-11f1-b9ec-b316d47b78c3"></script>
+    </div>
+
+    <p class="fine">Robyn Linn<br />No noise. Unsubscribe anytime.</p>
+  </main>
+
+</body>
+</html>
