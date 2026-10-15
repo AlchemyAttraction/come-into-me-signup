@@ -11,6 +11,13 @@ const clean = (v, max) => String(v ?? "").trim().slice(0, max);
 // Supports both EmailOctopus key styles:
 //   newer keys start with "eo_"  -> API v2 (Bearer auth, upsert)
 //   older keys have no prefix    -> API v1.6 (key in body)
+// API v2 wants tags as an object ({ "tag": true }), not an array.
+function toV2(payload) {
+  const out = { ...payload };
+  if (Array.isArray(out.tags)) out.tags = Object.fromEntries(out.tags.map((t) => [t, true]));
+  return out;
+}
+
 async function addContact(apiKey, listId, payload) {
   const isV2 = apiKey.startsWith("eo_");
   const url = isV2
@@ -22,10 +29,10 @@ async function addContact(apiKey, listId, payload) {
       "Content-Type": "application/json",
       ...(isV2 ? { Authorization: `Bearer ${apiKey}` } : {}),
     },
-    body: JSON.stringify(isV2 ? payload : { api_key: apiKey, ...payload }),
+    body: JSON.stringify(isV2 ? toV2(payload) : { api_key: apiKey, ...payload }),
   });
   const data = await r.json().catch(() => ({}));
-  return { r, data, code: data?.error?.code || data?.code };
+  return { r, data, code: data?.error?.code || data?.code || (r.status === 422 ? "INVALID_PARAMETERS" : undefined) };
 }
 
 export default async function handler(req, res) {
@@ -61,10 +68,14 @@ export default async function handler(req, res) {
     if (!out.r.ok && out.code === "INVALID_PARAMETERS" && firstName) {
       out = await addContact(apiKey, listId, base);
     }
+    // Last resort: email only, no tag.
+    if (!out.r.ok && out.code === "INVALID_PARAMETERS") {
+      out = await addContact(apiKey, listId, { email_address: email });
+    }
     if (out.r.ok) return res.status(200).json({ ok: true });
     if (out.code === "MEMBER_EXISTS_WITH_EMAIL_ADDRESS") return res.status(200).json({ ok: true, already: true });
 
-    console.error("EmailOctopus error", out.r.status, out.code, out.data?.error?.message || out.data?.message);
+    console.error("EmailOctopus error", out.r.status, JSON.stringify(out.data).slice(0, 800));
     return res.status(502).json({ ok: false, error: "Something snagged on our side. Try again in a moment." });
   } catch (err) {
     console.error("EmailOctopus request failed", err);
